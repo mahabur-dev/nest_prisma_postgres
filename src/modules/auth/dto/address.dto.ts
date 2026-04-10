@@ -4,22 +4,22 @@ export class addressDto {
 
   @IsOptional()
   @IsString()
-  street: string;
+  street!: string;
   
   @IsOptional()
   @IsString()
-  city: string;
+  city!: string;
   
   @IsOptional()
   @IsString()
-  state: string;
+  state!: string;
 
   @IsOptional()
   @IsString()
-  country: string;
+  country!: string;
 
   @IsOptional()
   @IsString()
-  zipCode: string;
+  zipCode!: string;
 
 }

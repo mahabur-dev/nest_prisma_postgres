@@ -11,21 +11,21 @@ datasource db {
   provider = "postgresql"
 }
 
-model User { 
-  id     Int  @id @default(autoincrement())
-  email  String @unique
-  name   String?
-  password String
-  image  String?
-  phone  String?
-  nid    String?
-  profession String?
-  // address Address?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+// model User { 
+//   id     Int  @id @default(autoincrement())
+//   email  String @unique
+//   name   String?
+//   password String
+//   image  String?
+//   phone  String?
+//   nid    String?
+//   profession String?
+//   address Address?
+//   createdAt DateTime  @default(now())
+//   updatedAt DateTime  @updatedAt
 
-  @@map("users")
-}
+//   @@map("users")
+// }
 
 // model Address {
 // id       Int      @id @default(autoincrement())
@@ -40,3 +40,39 @@ model User {
 // updatedAt DateTime @updatedAt
 //   @@map("addresses")
 // }
+
+model User { 
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  password  String
+  image     String?
+  phone     String?
+  nid       String?
+  profession String?
+
+  // 🔥 CHANGE HERE
+  addresses Address[]  
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  street    String
+  city      String
+  state     String
+  zipCode   String
+  country   String
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("addresses")
+}
