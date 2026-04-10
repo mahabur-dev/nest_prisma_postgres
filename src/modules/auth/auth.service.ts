@@ -5,12 +5,14 @@ import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update.dto';
+import { CloudinaryService } from 'src/common/services/cloudinary.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async register(dto: RegisterDto) {
@@ -67,14 +69,14 @@ async updateProfile(
 
   let imageUrl: string | undefined;
 
-//   if (file) {
-//     // Delete old image from Cloudinary if exists
-//     if (user.image) {
-//       await this.cloudinaryService.deleteImage(user.image);
-//     }
-//     // Upload new image
-//     imageUrl = await this.cloudinaryService.uploadImage(file, 'profiles');
-//   }
+  if (file) {
+    // Delete old image from Cloudinary if exists
+    if (user.image) {
+      await this.cloudinaryService.deleteImage(user.image);
+    }
+    // Upload new image
+    imageUrl = await this.cloudinaryService.uploadImage(file, 'profiles');
+  }
 
   const updatedUser = await this.usersService.update(userId, {
     ...dto,
