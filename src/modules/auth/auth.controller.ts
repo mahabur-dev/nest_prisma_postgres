@@ -47,3 +47,4 @@ export class AuthController {
     return this.authService.updateProfile(user.id, dto, file);
   }
 }
+///check terminal work or not
