@@ -51,7 +51,8 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UsersModule } from '../users/users.module';
-import { CloudinaryService } from 'src/common/services/cloudinary.service';
+import { CloudinaryService } from '../../common/services/cloudinary.service';
+// import { CloudinaryService } from 'src/common/services/cloudinary.service';
 
 
 // @Global()

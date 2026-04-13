@@ -1,61 +1,24 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
+  format = "ts"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-// model User { 
-//   id     Int  @id @default(autoincrement())
-//   email  String @unique
-//   name   String?
-//   password String
-//   image  String?
-//   phone  String?
-//   nid    String?
-//   profession String?
-//   address Address?
-//   createdAt DateTime  @default(now())
-//   updatedAt DateTime  @updatedAt
-
-//   @@map("users")
-// }
-
-// model Address {
-// id       Int      @id @default(autoincrement())
-// street   String
-// city     String
-// state    String
-// zipCode  String
-// country  String
-// userId   Int      @unique
-// user     User     @relation(fields: [userId], references: [id])
-// createdAt DateTime @default(now())
-// updatedAt DateTime @updatedAt
-//   @@map("addresses")
-// }
-
-model User { 
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  name      String?
-  password  String
-  image     String?
-  phone     String?
-  nid       String?
+model User {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  name       String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  password   String
+  image      String?
+  nid        String?
+  phone      String?
   profession String?
-
-  // 🔥 CHANGE HERE
-  addresses Address[]  
-
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  addresses  Address[]
 
   @@map("users")
 }
@@ -67,12 +30,10 @@ model Address {
   state     String
   zipCode   String
   country   String
-
   userId    Int
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("addresses")
 }

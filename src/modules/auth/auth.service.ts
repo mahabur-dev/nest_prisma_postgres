@@ -5,7 +5,7 @@ import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update.dto';
-import { CloudinaryService } from 'src/common/services/cloudinary.service';
+import { CloudinaryService } from '../../common/services/cloudinary.service';
 
 @Injectable()
 export class AuthService {

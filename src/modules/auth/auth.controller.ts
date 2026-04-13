@@ -6,8 +6,9 @@ import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { ChangePasswordDto } from './dto/change_password.dto';
 import { UpdateAuthDto } from './dto/update.dto';
-import { multerConfig } from 'src/config/multer.config';
+// import { multerConfig } from 'src/config/multer.config';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfig } from '../../config/multer.config';
 
 @Controller('auth')
 export class AuthController {
