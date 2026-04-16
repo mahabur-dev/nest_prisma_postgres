@@ -2,6 +2,8 @@ import {
   Controller, Post, Get, Put,
   Body, UseGuards, HttpCode, HttpStatus,
   UseInterceptors, UploadedFile,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthService } from './auth.service';
@@ -58,5 +60,12 @@ export class AuthController {
   ) {
     const data = await this.authService.updateProfile(user.id, dto, file);
     return { message: 'Profile updated successfully', data };
+  }
+  @Delete('delete-address/:id')
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  async deleteAddress(@Param('id') id: string, @CurrentUser() user: any) {
+    const data = await this.authService.deleteAddress(user.id, parseInt(id));
+    return { message: 'Address deleted successfully', data };
   }
 }
