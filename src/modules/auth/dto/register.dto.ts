@@ -7,23 +7,7 @@ import {
   IsArray
 } from 'class-validator';
 import { Type } from 'class-transformer';
-
-class AddressDto {
-  @IsString()
-  street!: string;
-
-  @IsString()
-  city!: string;
-
-  @IsString()
-  state!: string;
-
-  @IsString()
-  zipCode!: string;
-
-  @IsString()
-  country!: string;
-}
+import { AddressDto } from './address.dto';
 
 export class RegisterDto {
   @IsEmail()
