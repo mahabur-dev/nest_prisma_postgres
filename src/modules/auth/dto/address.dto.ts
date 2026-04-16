@@ -1,6 +1,10 @@
-import { IsOptional, IsString} from 'class-validator';
+import { IsInt, IsOptional, IsString} from 'class-validator';
 
-export class addressDto {
+export class AddressDto {
+
+  @IsOptional()
+  @IsInt()
+  id?: number; 
 
   @IsOptional()
   @IsString()

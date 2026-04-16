@@ -121,15 +121,24 @@ export class AuthService {
 
     const { addresses, ...rest } = dto;
 
-    return this.prisma.user.update({
+   return this.prisma.user.update({
       where: { id: userId },
       data: {
         ...rest,
         ...(image && { image }),
         ...(addresses && {
           addresses: {
-            deleteMany: { userId },
-            create: addresses.map((addr) => addr)
+            // Only create new addresses (those without an id)
+            create: addresses
+              .filter((addr) => !addr.id)
+              .map(({ id, ...addr }) => addr),
+            // Update only existing addresses (those with an id)
+            updateMany: addresses
+              .filter((addr) => addr.id)
+              .map((addr) => ({
+                where: { id: addr.id },
+                data: { ...addr },
+              })),
           },
         }),
       },
@@ -140,4 +149,14 @@ export class AuthService {
   private signToken(userId: number, email: string) {
     return this.jwtService.sign({ sub: userId, email });
   }
+  async deleteAddress(userId: number, addressId: number) {
+    const address = await this.prisma.address.findUnique({
+      where: { id: addressId },
+      select: { userId: true },
+    });
+    if (!address) throw new NotFoundException('Address not found');
+    if (address.userId !== userId) throw new UnauthorizedException('Not authorized to delete this address');
+    await this.prisma.address.delete({ where: { id: addressId } });
+  }
 }
+
