@@ -1,0 +1,18 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "mahabur",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "mahabur": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "mahabur",
+    "origin"
+  ]
+}
